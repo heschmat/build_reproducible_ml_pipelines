@@ -1,0 +1,10 @@
+wandb:
+  project: ml_pipeline_mvp_iris
+  entity: heschmat
+
+data:
+  dir: data
+  filename: data/iris.csv
+
+mlflow:
+  experiment: iris_pipeline_experiment
