@@ -4,7 +4,7 @@ wandb:
 
 data:
   dir: data
-  filename: data/iris.csv
+  filename: iris.csv
 
 mlflow:
   experiment: iris_pipeline_experiment
