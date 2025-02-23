@@ -1,0 +1,10 @@
+name: ml_pipeline_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - wandb==0.18
+    - mlflow
