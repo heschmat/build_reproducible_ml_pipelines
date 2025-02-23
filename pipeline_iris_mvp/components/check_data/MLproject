@@ -1,0 +1,7 @@
+name: check_data
+
+conda_env: conda.yml
+
+entry_points:
+  main:
+    command: "python check_data.py"

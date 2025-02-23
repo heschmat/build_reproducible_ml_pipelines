@@ -1,0 +1,11 @@
+name: check_data_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pandas
+  - pytest
+  - pip
+  - pip:
+    - wandb==0.18
+    - mlflow
