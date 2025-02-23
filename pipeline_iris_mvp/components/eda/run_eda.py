@@ -22,7 +22,6 @@ with open(PATH_CONFIG, 'r') as f:
 
 DATA_DIR = config['data']['dir']
 EDA_OUTPUT_DIR = os.path.join(ROOT_DIR, DATA_DIR, 'eda')
-logger.info(f'==> EDA PATH {EDA_OUTPUT_DIR}')
 
 os.makedirs(EDA_OUTPUT_DIR, exist_ok=True)
 
@@ -42,7 +41,8 @@ def perform_eda():
     mlflow.log_param('num_features', data.shape[1])
 
     summary_stats = data.describe()
-    logger.info(summary_stats)
+    # Make the statistics columns and column names appear properly in the log.
+    logger.info('\n%s\n', summary_stats.to_string())
     wandb.log({'summary_stats': wandb.Table(dataframe=summary_stats)})
 
     # Histogram
@@ -63,7 +63,8 @@ def perform_eda():
     plt.close()
     wandb.log({'sepal length vs. petal length': wandb.Image(scatter_path)})
 
-    logger.info('*** EDA completed successfully')
+    logger.info('*** ✅ EDA completed successfully ***')
+    logger.info(f'EDA plots saved to >>> {EDA_OUTPUT_DIR}')
 
 def main():
     mlflow.log_param('stage', 'eda')

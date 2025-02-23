@@ -53,12 +53,3 @@ class DfPlugin:
         """
         if 'df' in metafunc.fixturenames:
             metafunc.parametrize('df', [self.df])
-
-
-class DfPlugin:
-    def __init__(self, df):
-        self.df = df
-
-    def pytest_generate_tests(self, metafunc):
-        if 'df' in metafunc.fixturenames:
-            metafunc.parametrize('df', [self.df])

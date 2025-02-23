@@ -13,7 +13,7 @@ import mlflow
 from test_check_data import run_tests
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 # Get absolute path of the project's root directory.
@@ -32,7 +32,7 @@ def main():
     artifact_dir = artifact.download()
 
     # Load dataset
-    data_path = os.path.join(artifact_dir, 'iris.csv')
+    data_path = os.path.join(artifact_dir, 'data.csv')
     df = pd.read_csv(data_path)
 
     logger.info("*** Running data validation tests... ***")

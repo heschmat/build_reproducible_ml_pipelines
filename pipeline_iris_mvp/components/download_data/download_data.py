@@ -12,18 +12,19 @@ import mlflow
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-with open('../../config.yaml', 'r') as f:
-    config = yaml.safe_load(f)
-
 # Get absolute path of the project's root directory.
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+PATH_CONFIG = os.path.join(ROOT_DIR, 'config.yaml')
+
+with open(PATH_CONFIG, 'r') as f:
+    config = yaml.safe_load(f)
 
 # Get file absolute path.
 DATA_DIR = os.path.join(ROOT_DIR, config['data']['dir'])
 FILE_REL_PATH = config['data']['filename']
 FILE_ABS_PATH = os.path.join(DATA_DIR, FILE_REL_PATH)
 
-URL = 'https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/0e7a9b0a5d22642a06d3d5b9bcbad9890c8ee534/iris.csv'
+URL = config['data']['url']
 
 def download_data():
     """Downloads the dataset and logs necessary details."""
@@ -41,7 +42,7 @@ def download_data():
         duration = time.time() - start_time
 
         # Log the relative path to file.
-        logger.info(f'File downloaded: {FILE_REL_PATH} ({filesize:2f} KB) in {duration:2f} seconds')
+        logger.info(f'✅ File downloaded: {FILE_REL_PATH} ({filesize:2f} KB) in {duration:2f} seconds')
 
         # Log to MLflow
         mlflow.log_param('stage', 'download_data')
@@ -51,7 +52,7 @@ def download_data():
         return filesize, duration
 
     except requests.exceptions.RequestException as e:
-        logger.error(f'Download failed: {e}')
+        logger.error(f'❌ Download failed:\n{e}')
         mlflow.log_param('download_failed', True)
         return None, None
 
