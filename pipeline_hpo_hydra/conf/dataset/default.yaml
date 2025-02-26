@@ -1,0 +1,2 @@
+input_path: 'data/stroke_data.csv'
+output_pass: 'data/processed_data.csv'

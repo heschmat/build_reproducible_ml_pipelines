@@ -1,0 +1,15 @@
+defaults:
+  - _self_
+  - dataset: default
+  - model: logistic
+
+mlflow_tracking_uri: 'http://localhost:5000'
+
+input_path: 'data/stroke_data.csv'
+processed_path: 'data/processed_data.csv'
+output_model: 'outputs/model.pkl'
+
+# Fix the working directory
+hydra:
+  run:
+    dir: .

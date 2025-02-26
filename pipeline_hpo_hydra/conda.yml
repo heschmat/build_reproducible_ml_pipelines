@@ -1,0 +1,13 @@
+name: stroke_prediction_pipeline
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.10
+  - hydra-core
+  - omegaconf
+  - pip
+  - pip:
+    - mlflow

@@ -1,0 +1,16 @@
+name: ml_pipeline
+
+conda_env: conda.yml
+
+entry_points:
+  main:
+    parameters:
+      hydra_options:
+        description: Hydra options
+        type: str
+        default: ''
+    command: >-
+      python main.py $(echo {hydra_options})
+
+# mlflow run . -P hydra_options="model.name='random_forest'"
+# mlflow run . -P hydra_options="model='random_forest' model.max_depth=3 model.n_estimators=10"
